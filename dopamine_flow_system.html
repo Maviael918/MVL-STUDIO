@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistema de Créditos de Dopamina</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+
+  <!-- Estilo personalizado -->
+  <link rel="stylesheet" href="dopamine_flow_system.css" />
+</head>
+<body>
+  <header>
+    <div id="icone-cerebro">
+      <i class="fas fa-brain fa-3x" style="color: #8e44ad;"></i>
+    </div>
+    <h1>Controle de Ações – Crédito de Dopamina</h1>
+    <div id="user-session">
+      <button id="logout-btn" style="display: none;">Sair</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Seção de Autenticação (inicialmente visível) -->
+    <section id="auth-section">
+      <h2>Acesse sua conta</h2>
+      <input type="email" id="email-input" placeholder="Seu e-mail" />
+      <input type="password" id="password-input" placeholder="Sua senha" />
+      <button id="login-btn">Entrar</button>
+      <button id="signup-btn">Cadastrar</button>
+    </section>
+
+    <!-- Conteúdo Principal do Sistema (inicialmente oculto) -->
+    <div id="app-content" style="display: none;">
+      <section id="nova-acao">
+        <h2>Adicionar Nova Ação</h2>
+        <input type="text" id="descricao" placeholder="Descreva a ação..." />
+        <input type="number" id="pontos" placeholder="Créditos de dopamina" />
+        <button id="adicionar">Adicionar Ação</button>
+      </section>
+
+      <section id="nova-infracao">
+        <h2>Registrar Infração (Débito)</h2>
+        <input type="text" id="descricao-infracao" placeholder="Descreva a infração..." />
+        <input type="number" id="pontos-infracao" placeholder="Pontos negativos (-)" />
+        <button id="adicionar-infracao">Registrar Infração</button>
+      </section>
+
+      <section id="acoes">
+        <h2>Ações Realizadas</h2>
+        <button id="ver-lista">Ver/Ocultar Lista de Ações</button>
+        <ul id="lista-acoes">
+          <!-- A lista de ações do Supabase aparecerá aqui -->
+        </ul>
+      </section>
+
+      <section id="total">
+        <h2>Total de Créditos: <span id="total-pontos">0</span></h2>
+      </section>
+
+      <section id="divida">
+        <h2>Dívida de Dopamina: <span id="total-divida">0</span></h2>
+        <button id="pagar-divida">Pagar Dívida</button>
+      </section>
+    </div>
+  </main>
+
+  <!-- Biblioteca Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Configuração do Supabase -->
+  <script src="supabase_config.js"></script>
+
+  <!-- Script principal do sistema -->
+  <script src="dopamine_flow_system.js"></script>
+</body>
+</html>
