@@ -18,57 +18,79 @@
     </div>
     <h1>Controle de Ações – Crédito de Dopamina</h1>
     <div id="user-session">
+      <button id="config-btn"><i class="fas fa-cog"></i></button>
       <button id="logout-btn" style="display: none;">Sair</button>
     </div>
   </header>
 
   <main>
-    <!-- Seção de Autenticação (inicialmente visível) -->
-    <section id="auth-section">
-      <h2>Acesse sua conta</h2>
-      <input type="email" id="email-input" placeholder="Seu e-mail" />
-      <input type="password" id="password-input" placeholder="Sua senha" />
-      <button id="login-btn">Entrar</button>
-      <button id="signup-btn">Cadastrar</button>
-    </section>
-
-    <!-- Conteúdo Principal do Sistema (inicialmente oculto) -->
     <div id="app-content" style="display: none;">
-      <section id="nova-acao">
-        <h2>Adicionar Nova Ação</h2>
-        <input type="text" id="descricao" placeholder="Descreva a ação..." />
-        <input type="number" id="pontos" placeholder="Créditos de dopamina" />
-        <button id="adicionar">Adicionar Ação</button>
+
+      <!-- Seção de Cards de Resumo -->
+      <section id="dashboard-summary">
+        <div class="summary-card">
+          <h3>Saldo Total de Dopamina</h3>
+          <p id="total-pontos">0</p>
+        </div>
       </section>
 
-      <section id="nova-infracao">
-        <h2>Registrar Infração (Débito)</h2>
-        <input type="text" id="descricao-infracao" placeholder="Descreva a infração..." />
-        <input type="number" id="pontos-infracao" placeholder="Pontos negativos (-)" />
-        <button id="adicionar-infracao">Registrar Infração</button>
+      <!-- Seção de Gráficos -->
+      <section id="dashboard-charts">
+        <div class="chart-container">
+          <h3>Distribuição de Créditos</h3>
+          <canvas id="credits-pie-chart"></canvas>
+        </div>
+        <div class="chart-container">
+          <h3>Balanço ao Longo do Tempo</h3>
+          <canvas id="balance-line-chart"></canvas>
+        </div>
       </section>
 
-      <section id="acoes">
-        <h2>Ações Realizadas</h2>
-        <button id="ver-lista">Ver/Ocultar Lista de Ações</button>
-        <ul id="lista-acoes">
-          <!-- A lista de ações do Supabase aparecerá aqui -->
-        </ul>
-      </section>
-
-      <section id="total">
-        <h2>Total de Créditos: <span id="total-pontos">0</span></h2>
-      </section>
-
-      <section id="divida">
-        <h2>Dívida de Dopamina: <span id="total-divida">0</span></h2>
-        <button id="pagar-divida">Pagar Dívida</button>
-      </section>
     </div>
   </main>
 
+  <!-- O Modal de Configurações -->
+  <div id="config-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h2>Configurações</h2>
+
+      <div class="tab">
+        <button class="tablinks" onclick="openTab(event, 'Moedas')">Moedas</button>
+        <button class="tablinks" onclick="openTab(event, 'Dividas')">Dívidas</button>
+      </div>
+
+      <div id="Moedas" class="tabcontent">
+        <h3>Adicionar Nova Moeda</h3>
+        <input type="text" id="moeda-nome" placeholder="Nome da Moeda">
+        <input type="number" id="moeda-valor" placeholder="Valor">
+        <button id="add-moeda-btn">Adicionar Moeda</button>
+
+        <h3 style="margin-top: 20px;">Moedas Existentes</h3>
+        <ul id="lista-moedas-existentes" style="list-style: none; padding: 0;">
+          <!-- Moedas existentes serão carregadas aqui -->
+        </ul>
+      </div>
+
+      <div id="Dividas" class="tabcontent">
+        <h3>Adicionar Nova Dívida</h3>
+        <input type="text" id="divida-nome" placeholder="Nome da Dívida">
+        <input type="number" id="divida-valor" placeholder="Valor">
+        <button id="add-divida-btn">Adicionar Dívida</button>
+
+        <h3 style="margin-top: 20px;">Dívidas Existentes</h3>
+        <ul id="lista-dividas-existentes" style="list-style: none; padding: 0;">
+          <!-- Dívidas existentes serão carregadas aqui -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- Biblioteca Supabase -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Biblioteca Chart.js para Gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <!-- Configuração do Supabase -->
   <script src="supabase_config.js"></script>

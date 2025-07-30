@@ -3,18 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistemas Mvl Studio</title>
+  <title>Painel de Controle - Mvl Studio</title>
   <link rel="stylesheet" href="style.css" />
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.min.css">
 </head>
 <body>
   <header>
-    <h1>Sistemas Mvl Studio</h1>
+    <h1>Painel de Controle</h1>
+    <div id="user-session">
+      <button id="logout-btn" style="display: none;">Sair</button>
+    </div>
   </header>
 
   <main>
-    <button id="dopamine-system-btn">Sistema de fluxo de dopamina</button>
+    <!-- Seção de Autenticação -->
+    <section id="auth-section">
+      <h2>Acesse sua conta</h2>
+      <input type="email" id="email-input" placeholder="Seu e-mail" />
+      <input type="password" id="password-input" placeholder="Sua senha" />
+      <button id="login-btn">Entrar</button>
+      <button id="signup-btn">Cadastrar</button>
+    </section>
+
+    <!-- Conteúdo do Painel (visível após login) -->
+    <div id="panel-content" style="display: none;">
+      <h2>Meus Aplicativos</h2>
+      <div id="app-list">
+        <div class="app-card">
+          <h3>Sistema de Fluxo de Dopamina</h3>
+          <p>Gerencie as moedas, dívidas e créditos do seu app de dopamina.</p>
+          <button id="manage-dopamine-btn">Gerenciar</button>
+        </div>
+        <!-- Outros aplicativos podem ser adicionados aqui -->
+      </div>
+    </div>
   </main>
 
+  <!-- Biblioteca Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Configuração do Supabase -->
+  <script src="supabase_config.js"></script>
+
+  <!-- Script principal do painel -->
   <script src="script.js"></script>
 </body>
 </html>
